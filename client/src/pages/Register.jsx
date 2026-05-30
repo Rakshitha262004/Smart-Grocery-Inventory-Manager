@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
-import { loginUser } from '../services/api';
+import { registerUser } from '../services/api';
 
-export default function Login() {
-  const [form, setForm] = useState({ email: '', password: '' });
+export default function Register() {
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -14,22 +14,22 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await loginUser(form);
+      const { data } = await registerUser(form);
       login(data.user, data.token);
-      toast.success(`Welcome back, ${data.user.name}!`);
+      toast.success('Account created! 🎉');
       navigate('/');
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Login failed');
+      toast.error(err.response?.data?.message || 'Registration failed');
     } finally { setLoading(false); }
   };
 
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4">
       <div className="bg-gray-800 p-8 rounded-2xl w-full max-w-md border border-gray-700">
-        <h1 className="text-3xl font-bold text-white mb-2">Welcome Back 👋</h1>
-        <p className="text-gray-400 mb-6">Login to your Grocery Manager</p>
+        <h1 className="text-3xl font-bold text-white mb-2">Create Account 🛒</h1>
+        <p className="text-gray-400 mb-6">Start managing your groceries</p>
         <form onSubmit={handleSubmit} className="space-y-4">
-          {[['Email','email','email','you@example.com'],['Password','password','password','Your password']].map(([label,type,field,ph]) => (
+          {[['Name','text','name','Your full name'],['Email','email','email','you@example.com'],['Password','password','password','Min 6 characters']].map(([label,type,field,ph]) => (
             <div key={field}>
               <label className="text-gray-300 text-sm block mb-1">{label}</label>
               <input type={type} value={form[field]} placeholder={ph} required
@@ -39,11 +39,11 @@ export default function Login() {
           ))}
           <button type="submit" disabled={loading}
             className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg">
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? 'Creating...' : 'Create Account'}
           </button>
         </form>
         <p className="text-gray-400 text-center mt-4 text-sm">
-          No account? <Link to="/register" className="text-green-400 hover:underline">Register here</Link>
+          Already have an account? <Link to="/login" className="text-green-400 hover:underline">Login</Link>
         </p>
       </div>
     </div>
