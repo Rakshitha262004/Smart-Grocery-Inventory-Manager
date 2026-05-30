@@ -123,10 +123,8 @@ VITE_API_URL=http://localhost:5000/api
 
 | Register | Login | Dashboard |
 |----------|-----------|--------------|
-| ![register](outputs/1.png) | ![login](outputs/2.png) | ![dashboard](outputs/3.png)
-![dashboard](outputs/4.png)
-![dashboard](outputs/5.png)
-![dashboard](outputs/6.png)|
+| ![register](outputs/1.png) | ![login](outputs/2.png) | ![dashboard](outputs/3.png) |
+| ![dashboard](outputs/4.png) | ![dashboard](outputs/5.png) | ![dashboard](outputs/6.png) |
 
 ---
 🎥 Project Demo Video
